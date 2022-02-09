@@ -56,7 +56,7 @@ class BaseClassifier:
     def set_model_field(self, field_name):
 
         # print("Set model field name to: {}".format(field_name))
-        st.write("Set model field name to: {",field_name,"}")
+        st.write("Set model field name to:",field_name,'"')
         self.model_field_name=field_name
 
     def update_data(self, new_preprocessed):
@@ -88,7 +88,7 @@ class BaseClassifier:
 
     def preprocess(self, word_list):
         # print("Pre-processing {} values".format(len(word_list)))
-        st.write("Pre-processing {",len(word_list),"} values")
+        st.write("Pre-processing",len(word_list)," values")
         values=[]
         for w in tqdm(word_list):
              values.append(self._preprocess(w))
