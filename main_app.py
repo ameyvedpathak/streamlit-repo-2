@@ -13,7 +13,7 @@ from PIL import Image
 
 @st.cache
 def convert_df(df):
-    return df.to_csv().encode('utf-8')
+    return df.to_csv(index=False).encode('utf-8')
 
 def main(count=0):
 
@@ -70,7 +70,7 @@ def main(count=0):
             csv = convert_df(output)
 
             st.download_button(
-                "Press to Download",
+                "Press to Download Results",
                 csv,
                 "Reordered_file.csv",
                 "text/csv",
