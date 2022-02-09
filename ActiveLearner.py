@@ -3,12 +3,13 @@ import subprocess
 
 # implement pip as a subprocess:
 subprocess.check_call(
-    [sys.executable, '-m', 'pip', 'install', 'nltk'])
+    [sys.executable, '-m', 'pip', 'install', 'nltk','os'])
 
 import pandas as pd
 import plotly.express as px
 import streamlit as st
 import nltk
+import os
 # from nltk.stem import PorterStemmer
 # from nltk.tokenize import word_tokenize
 from nltk.stem import WordNetLemmatizer
