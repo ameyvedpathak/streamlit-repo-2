@@ -10,6 +10,11 @@ import streamlit as st
 import pickle
 from PIL import Image
 
+
+@st.cache
+def convert_df(df):
+    return df.to_csv().encode('utf-8')
+
 def main(count=0):
 
     image = Image.open('IO_logo.png')
@@ -56,7 +61,21 @@ def main(count=0):
             # al = ActiveLearner(classifier, data, field="Interventions", model_name="Filter")
             al.simulate_learning()
 
+            # import streamlit as st
+            # import pandas as pd
 
+            #df = pd.read_csv("dir/file.csv")
+
+            output = al.reorder_once()
+            csv = convert_df(output)
+
+            st.download_button(
+                "Press to Download",
+                csv,
+                "Reordered_file.csv",
+                "text/csv",
+                key='download-csv'
+            )
     # elif choice == "SPECTER":
     #     st.subheader("Dataset")
     #     data_file = st.file_uploader("Upload CSV", type=['csv'])
