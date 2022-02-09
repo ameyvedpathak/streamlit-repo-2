@@ -1,0 +1,10 @@
+pandas
+streamlit
+joblib
+nltk
+sklearn
+pyyaml==5.4.1
+plotly.express
+tqdm
+streamlit
+statsmodels==0.10.2
