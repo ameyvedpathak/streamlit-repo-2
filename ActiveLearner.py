@@ -258,8 +258,11 @@ class ActiveLearner:
 
         fig = px.line(df, x="Screened References", y="References found", title='Screening progress',template='simple_white')
 
-
         fig.show()
+        chart_data = pd.DataFrame(df, columns=["Screened References"])
+        st.line_chart(chart_data)
+        chart_data_2 = pd.DataFrame(df, columns=["References found"])
+        st.line_chart(chart_data_2)
 
 
 
