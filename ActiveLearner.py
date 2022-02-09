@@ -43,8 +43,8 @@ class BaseClassifier:
         self.lemma=WordNetLemmatizer()
         self.stopwords=stopwords.words('english')
 
-        self.weights_path=self._make_outdir(folder_name="weights")#create output data folders for each specific model
-        self.results_path=self._make_outdir(folder_name="results")
+        # self.weights_path=self._make_outdir(folder_name="weights")#create output data folders for each specific model
+        # self.results_path=self._make_outdir(folder_name="results")
         self.model_field_name=""
 
 
@@ -63,17 +63,17 @@ class BaseClassifier:
 
 
 
-    def _make_outdir(self,folder_name="folder"):
-        """
-        Create output directories
-        :param folder_name:
-        :return:
-        """
-        this_path=os.path.join(folder_name,self.model_name)
-
-        if not os.path.exists(this_path):
-            os.mkdir(this_path)
-            return this_path
+    # def _make_outdir(self,folder_name="folder"):
+    #     """
+    #     Create output directories
+    #     :param folder_name:
+    #     :return:
+    #     """
+    #     this_path=os.path.join(folder_name,self.model_name)
+    #
+    #     if not os.path.exists(this_path):
+    #         os.mkdir(this_path)
+    #         return this_path
 
     def _get_wordnet_pos(self,word):
         """Map POS tag to first character lemmatize() accepts"""
