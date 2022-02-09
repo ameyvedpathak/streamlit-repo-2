@@ -4,7 +4,7 @@ import subprocess
 # implement pip as a subprocess:
 subprocess.check_call(
     [sys.executable, '-m', 'pip', 'install', 'nltk','sentence-transformers'])
-
+import streamlit as st
 import os
 import nltk
 # from nltk.stem import PorterStemmer
@@ -56,7 +56,8 @@ class BaseClassifier:
 
     def set_model_field(self, field_name):
 
-        print("Set model field name to: {}".format(field_name))
+        # print("Set model field name to: {}".format(field_name))
+        st.write("Set model field name to:", field_name)
         self.model_field_name=field_name
 
     def update_data(self, new_preprocessed):
@@ -87,7 +88,8 @@ class BaseClassifier:
         return tag_dict.get(tag, wordnet.NOUN)
 
     def preprocess(self, word_list):
-        print("Pre-processing {} values".format(len(word_list)))
+        # print("Pre-processing {} values".format(len(word_list)))
+        st.write("Pre-processing", len(word_list), " values")
         values=[]
         for w in tqdm(word_list):
              values.append(self._preprocess(w))
@@ -169,7 +171,8 @@ def calculate_similarity_single_sent(pos_idx, cos_sim):
 class SPECTER_CLS(BaseClassifier):
 
     def update_field(self, current_data):
-        print("Loading and making similarity calculations...")
+        # print("Loading and making similarity calculations...")
+        st.write("Loading and making similarity calculations...")
         self.model_name = 'sentence-transformers/allenai-specter'
         self.model = SentenceTransformer(self.model_name)
 
@@ -192,8 +195,10 @@ class SPECTER_CLS(BaseClassifier):
 
     def predict(self, current_data):
 
-        print("Predicting. Currently discovered {} labels".format(
-            len(list(current_data[current_data["discovered_labels"] != ""].index.values))))
+        # print("Predicting. Currently discovered {} labels".format(
+        #     len(list(current_data[current_data["discovered_labels"] != ""].index.values))))
+        st.write("Predicting. Currently discovered {} labels",len(list(current_data[current_data["discovered_labels"] != ""].index.values)))
+
         # print('Predicting {} data points using <{}> model'.format(len(self.preprocessed),self.model_name))
         self.predictions = []
 
@@ -203,26 +208,29 @@ class SPECTER_CLS(BaseClassifier):
             idx_pos = random.choices(idx, k=10)
         else:
             idx_pos = idx
-        print("Found {} labels, predicting based on indexes: {}".format(len(idx),
-                                                                        idx_pos))  # print first five as sanity check
+        # print("Found {} labels, predicting based on indexes: {}".format(len(idx),idx_pos))  # print first five as sanity check
+        st.write("Found",len(idx),"labels, predicting based on indexes:",idx_pos)
         #print(idx)
 
         try:
             # sci_title_sim=calculate_similarity_single_sent(idx_pos,self.cos_sim)
-            print(self.was_prepared)
+            # print(self.was_prepared)
+            st.write(self.was_prepared)
             # sci_title_sim=current_data["predictions"]
             # self.emb_source= self.model.encode(list(current_data["ScientificTitle"]))#get our data column
             # self.cos_sim = util.pytorch_cos_sim(self.emb_source, self.emb_source)
 
             sims = calculate_similarity_single_sent(idx_pos, self.cos_sim)
             sci_title_sim = []
-            print("Index values:")
+            # print("Index values:")
+            st.write("Index values:")
             for data_index in current_data.index.values:
                 sci_title_sim.append(sims[data_index])
 
             #print(sci_title_sim)
         except:
-            print("Resetting an dpreparing data...")
+            # print("Resetting an dpreparing data...")
+            st.write("Resetting an dpreparing data...")
             self.my_idx = idx_pos
             #current_data.reset_index(drop=True, inplace=True)
             #self.update_field(list(current_data["ScientificTitle"]))  # ScientificTitle#Interventions
@@ -230,7 +238,8 @@ class SPECTER_CLS(BaseClassifier):
             self.update_field(current_data)
             sci_title_sim = calculate_similarity_single_sent(self.my_idx, self.cos_sim)
             #print(sci_title_sim)
-            print(current_data.index.values[:10])
+            # print(current_data.index.values[:10])
+            st.write(current_data.index.values[:10])
 
         return sci_title_sim
 
@@ -265,10 +274,13 @@ class ActiveLearner:
         self.time_to_retrain=time_to_retrain
         self.classifier=classifier(model_name)
         self.change_field()
-        print("Done setting up classifier")
+        # print("Done setting up classifier")
+        st.write("Done setting up classifier")
 
     def change_field(self):
-        print("Setting {} as classification field.".format(self.field))
+        # print("Setting {} as classification field.".format(self.field))
+        st.write("Setting {", self.field, "} as classification field.")
+
         if self.do_preprocess:
             self.all_data["preprocessed"] = self.classifier.preprocess(self.all_data[self.field])#add back later if we need preprocessing
         else:
@@ -321,7 +333,8 @@ class ActiveLearner:
         df["References found"] = self.num_found_list
 
         fig = px.line(df, x="Screened References", y="References found", title='Screening progress',template='simple_white')
-
+        chart_data = pd.DataFrame(df, columns=["References found"])
+        st.line_chart(chart_data)
 
         fig.show()
 
@@ -339,7 +352,8 @@ class ActiveLearner:
         return self.all_data
 
     def simulate_learning(self):
-        print("Simulating active learning")
+        # print("Simulating active learning")
+        st.write("Simulating active learning")
         while "" in list(self.all_data["discovered_labels"]):#while there are sill unlabelled references
             #print(".......Starting iteration...")
             self.discover_labels()#"screen" 10 references. In similation, those refs are simply uncovered, ie added to a different column. If we have a screening UI and proper app, this method can be exchanged witha method that asks screeners to provide 10 labels
