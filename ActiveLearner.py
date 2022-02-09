@@ -3,7 +3,7 @@ import subprocess
 
 # implement pip as a subprocess:
 subprocess.check_call(
-    [sys.executable, '-m', 'pip', 'install', 'nltk','os'])
+    [sys.executable, '-m', 'pip', 'install', 'nltk'])
 
 import pandas as pd
 import plotly.express as px
