@@ -11,7 +11,7 @@ import pickle
 from PIL import Image
 
 def main(count=0):
-    global df
+
     image = Image.open('IO_logo.png')
     st.image(image, width=70, use_column_width='auto')
     st.subheader("NIHR Innovation Observatory AI SCAN")
@@ -22,6 +22,7 @@ def main(count=0):
     if choice == "Filter":
         st.subheader("Dataset")
         data_file = st.file_uploader("Upload CSV", type=['csv'],key="6")
+        global df
         if st.button("Process",key="7"):
             if data_file is not None:
                 file_details = {"Filename": data_file.name, "FileType": data_file.type, "FileSize": data_file.size}
