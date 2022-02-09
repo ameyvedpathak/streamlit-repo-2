@@ -30,7 +30,7 @@ def main(count=0):
                 df = pd.read_csv(data_file)
                 st.dataframe(df)
 
-        title = st.text_input('Enter free text for filter',"r'(\\bai\\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)'",key=5) #('Enter free text for filter', 'keywords or regular expression',key="5")
+        title = st.text_input('Enter free text for filter or regular expression',"r'(\\bai\\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)'",key=5) #('Enter free text for filter', 'keywords or regular expression',key="5")
         st.write('Filters used:', title,key="8")
 
         option = st.selectbox(
@@ -50,7 +50,7 @@ def main(count=0):
             data = data.sample(frac=1, random_state=48)
             data.reset_index(drop=True, inplace=True)
             st.write(title,key="20")
-            classifier = regexClassifier(title)
+            classifier = regexClassifier
             # st.write(option,key="20")
             al = ActiveLearner(classifier, data, field="ScientificTitle", model_name="Filter")
             # al = ActiveLearner(classifier, data, field="Interventions", model_name="Filter")

@@ -147,20 +147,10 @@ class emptyClassifier(BaseClassifier):
         return self.predictions
 
 
-class regexClassifier:
-    def __init__(self,BaseClassifier,filter):
-        self.BaseClassifier = BaseClassifier
-        self.filter = filter
-        self.train()
-        self.update_field()
-        self.predict()
-    #‘ ‘.join([‘the’, ‘quick’, ‘brown’, ‘fox’, ‘jumps’, ‘over’, ‘the’, ‘lazy’, ‘dog’])
-    # filter_temp = ["'","'r'",filter,"'"]
-    # ''.join(filter_temp)
-    #filter = "'"+'r'+filter+"'"
+class regexClassifier(BaseClassifier):
 
 
-    def train(self, filter=filter): #=r'(\bai\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)'):
+    def train(self, filter=r'(\bai\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)'):
         """
         There  is no training for a regular expression filter, but the filter could be reset to something else with each training step
         :param reset_filter:
