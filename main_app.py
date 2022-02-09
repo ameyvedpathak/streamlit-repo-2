@@ -132,7 +132,7 @@ def main(count=0):
         #
         # class ="giphy-embed" allowFullScreen > < / iframe > < p > < a href="https://giphy.com/gifs/paxful-fixing-under-maintenance-site-ocuQpTqeFlDOP4fFJI" > via GIPHY < / a > < / p >
 
-        st.markdown("![Alt Text](https://giphy.com/gifs/paxful-fixing-under-maintenance-site-ocuQpTqeFlDOP4fFJI)")
+        st.markdown("![Alt Text](https://media.giphy.com/media/ocuQpTqeFlDOP4fFJI/giphy.gif)")
         st.info("*************************************")
 
 if __name__ == '__main__':
