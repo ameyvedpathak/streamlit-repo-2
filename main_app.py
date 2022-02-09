@@ -46,7 +46,7 @@ def main(count=0):
             # pickled_model = pickle.load(open('model.pkl', 'rb'))
             # pickled_model.simulate_learning()
 
-            data = df
+            data = data_file
             data = data.sample(frac=1, random_state=48)
             data.reset_index(drop=True, inplace=True)
 
