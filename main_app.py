@@ -17,9 +17,9 @@ def convert_df(df):
 
 def main(count=0):
 
-    image = Image.open('IO_logo.png')
+    image = Image.open('IO_logo_new.png')
     st.image(image, width=70, use_column_width='auto')
-    st.subheader("NIHR Innovation Observatory AI SCAN")
+    st.subheader("AI SCAN")
     menu = ["Filter", "SPECTER", "About"]
     choice = st.sidebar.selectbox("Menu", menu,key=count)
     count +=1
