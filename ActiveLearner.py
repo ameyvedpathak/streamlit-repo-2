@@ -56,7 +56,7 @@ class BaseClassifier:
     def set_model_field(self, field_name):
 
         # print("Set model field name to: {}".format(field_name))
-        st.write("Set model field name to:",field_name,'"')
+        st.write("Set model field name to:",field_name)
         self.model_field_name=field_name
 
     def update_data(self, new_preprocessed):

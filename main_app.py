@@ -25,7 +25,6 @@ def main(count=0):
     count +=1
 
     if choice == "Filter":
-        st.subheader("Dataset")
         data_file = st.file_uploader("Upload CSV", type=['csv'],key="6")
         global df
         if st.button("Process",key="7"):
@@ -54,7 +53,7 @@ def main(count=0):
             data = pd.read_csv(data_file).fillna("")
             data = data.sample(frac=1, random_state=48)
             data.reset_index(drop=True, inplace=True)
-            st.write(title,key="20")
+            # st.write(title,key="20")
             classifier = regexClassifier
             # st.write(option,key="20")
             al = ActiveLearner(classifier, data, field="ScientificTitle", model_name="Filter")
@@ -76,21 +75,20 @@ def main(count=0):
                 "text/csv",
                 key='download-csv'
             )
-    # elif choice == "SPECTER":
-    #     st.subheader("Dataset")
-    #     data_file = st.file_uploader("Upload CSV", type=['csv'])
-    #     if st.button("Process"):
-    #         if data_file is not None:
-    #             file_details = {"Filename": data_file.name, "FileType": data_file.type, "FileSize": data_file.size}
-    #             st.write(file_details)
-    #
-    #             df = pd.read_csv(data_file)
-    #             st.dataframe(df)
-    #     option = st.selectbox(
-    #         'Select Field',
-    #         ('Scientific Title', 'Intervention', 'Outcomes'))
-    #
-    #     st.write('You selected:', option)
+    elif choice == "SPECTER":
+        data_file = st.file_uploader("Upload CSV", type=['csv'])
+        if st.button("Process"):
+            if data_file is not None:
+                file_details = {"Filename": data_file.name, "FileType": data_file.type, "FileSize": data_file.size}
+                st.write(file_details)
+
+                df = pd.read_csv(data_file)
+                st.dataframe(df)
+        option = st.selectbox(
+            'Select Field',
+            ('Scientific Title', 'Intervention', 'Outcomes'))
+
+        st.write('You selected:', option)
 
     else:
         st.info("About us")
