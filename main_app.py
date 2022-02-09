@@ -78,14 +78,14 @@ def main(count=0):
                 key='download-csv'
             )
     elif choice == "SPECTER":
-        data_file = st.file_uploader("Upload CSV", type=['csv'], key="6")
-        global df
-        if st.button("Process", key="7"):
-            if data_file is not None:
-                file_details = {"Filename": data_file.name, "FileType": data_file.type, "FileSize": data_file.size}
+        data_file2 = st.file_uploader("Upload CSV", type=['csv'], key="60")
+        global df2
+        if st.button("Process", key="70"):
+            if data_file2 is not None:
+                file_details = {"Filename": data_file2.name, "FileType": data_file2.type, "FileSize": data_file2.size}
                 st.write(file_details)
-                df = pd.read_csv(data_file)
-                st.dataframe(df)
+                df2 = pd.read_csv(data_file2)
+                st.dataframe(df2)
 
         option = st.selectbox(
             'Select Field',
@@ -99,7 +99,7 @@ def main(count=0):
             # pickled_model = pickle.load(open('model.pkl', 'rb'))
             # pickled_model.simulate_learning()
 
-            data = pd.read_csv(data_file).fillna("")
+            data = pd.read_csv(data_file2).fillna("")
             data = data.sample(frac=1, random_state=48)
             data.reset_index(drop=True, inplace=True)
             classifier = SPECTER_CLS
