@@ -51,6 +51,7 @@ def main(count=0):
             data.reset_index(drop=True, inplace=True)
 
             classifier = regexClassifier
+            st.write(option,key="20")
             al = ActiveLearner(classifier, data, field=option, model_name="Filter")
             # al = ActiveLearner(classifier, data, field="Interventions", model_name="Filter")
             al.simulate_learning()
