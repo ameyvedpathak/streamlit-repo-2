@@ -149,9 +149,10 @@ class emptyClassifier(BaseClassifier):
 
 class regexClassifier(BaseClassifier,filter):
     #‘ ‘.join([‘the’, ‘quick’, ‘brown’, ‘fox’, ‘jumps’, ‘over’, ‘the’, ‘lazy’, ‘dog’])
-    filter_temp = ["'","'r'",filter,"'"]
-    ''.join(filter_temp)
+    # filter_temp = ["'","'r'",filter,"'"]
+    # ''.join(filter_temp)
     #filter = "'"+'r'+filter+"'"
+    filter_temp=filter
 
     def train(self, filter=filter_temp): #=r'(\bai\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)'):
         """

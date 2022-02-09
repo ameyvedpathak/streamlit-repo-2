@@ -30,7 +30,7 @@ def main(count=0):
                 df = pd.read_csv(data_file)
                 st.dataframe(df)
 
-        title = st.text_input('(\bai\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)',key=5) #('Enter free text for filter', 'keywords or regular expression',key="5")
+        title = st.text_input(r'(\bai\b)|(artificial intelligence)|(machine[\s-]?learn(ing)?)',key=5) #('Enter free text for filter', 'keywords or regular expression',key="5")
         st.write('Filters used:', title,key="8")
 
         option = st.selectbox(
