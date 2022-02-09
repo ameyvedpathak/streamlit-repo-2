@@ -55,7 +55,8 @@ class BaseClassifier:
 
     def set_model_field(self, field_name):
 
-        print("Set model field name to: {}".format(field_name))
+        # print("Set model field name to: {}".format(field_name))
+        st.write("Set model field name to: {",field_name,"}")
         self.model_field_name=field_name
 
     def update_data(self, new_preprocessed):
@@ -86,7 +87,8 @@ class BaseClassifier:
         return tag_dict.get(tag, wordnet.NOUN)
 
     def preprocess(self, word_list):
-        print("Pre-processing {} values".format(len(word_list)))
+        # print("Pre-processing {} values".format(len(word_list)))
+        st.write("Pre-processing {",len(word_list),"} values")
         values=[]
         for w in tqdm(word_list):
              values.append(self._preprocess(w))
@@ -201,10 +203,12 @@ class ActiveLearner:
         self.time_to_retrain=time_to_retrain
         self.classifier=classifier(model_name)
         self.change_field()
-        print("Done setting up classifier")
+        #print("Done setting up classifier")
+        st.write("Done setting up classifier")
 
     def change_field(self):
-        print("Setting {} as classification field.".format(self.field))
+        # print("Setting {} as classification field.".format(self.field))
+        st.write("Setting {",self.field,"} as classification field.")
         if self.do_preprocess:
             self.all_data["preprocessed"] = self.classifier.preprocess(self.all_data[self.field])#add back later if we need preprocessing
         else:
@@ -259,8 +263,8 @@ class ActiveLearner:
         fig = px.line(df, x="Screened References", y="References found", title='Screening progress',template='simple_white')
 
         fig.show()
-        chart_data = pd.DataFrame(df, columns=["Screened References"])
-        st.line_chart(chart_data)
+        # chart_data = pd.DataFrame(df, columns=["Screened References"])
+        # st.line_chart(chart_data)
         chart_data_2 = pd.DataFrame(df, columns=["References found"])
         st.line_chart(chart_data_2)
 
@@ -278,7 +282,6 @@ class ActiveLearner:
         return self.all_data
 
     def simulate_learning(self):
-        print("Simulating active learning")
         st.write("Simulating active learning")
         while "" in list(self.all_data["discovered_labels"]):#while there are sill unlabelled references
             #print(".......Starting iteration...")
